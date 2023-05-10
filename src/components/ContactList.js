@@ -14,6 +14,7 @@ export default function ContactList(props) {
       key={contact.id}
     />
   ));
+
   return (
     <div className="ui main container">
       <h2>

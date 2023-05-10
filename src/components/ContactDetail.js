@@ -4,7 +4,7 @@ import { Link, useLocation } from "react-router-dom";
 
 export default function ContactDetail(props) {
   const location = useLocation();
-  console.log(location.state);
+
   return (
     <div className="main">
       <div className="ui card centered">
