@@ -1,9 +1,10 @@
-import "./App.css";
+import { BrowserRouter, Route, Routes } from "react-router-dom";
+import { useEffect, useState } from "react";
+import uuid from "react-uuid";
 import Header from "./Header";
 import AddContact from "./AddContact";
 import ContactList from "./ContactList";
-import { useEffect, useState } from "react";
-import uuid from "react-uuid";
+import ContactDetail from "./ContactDetail";
 
 function App() {
   const LOCAL_STORAGE_KEY = "contacts";
@@ -36,11 +37,27 @@ function App() {
   }, [contacts]);
 
   return (
-    <div className="ui container-fluid">
-      <Header />
-      <AddContact addContactHandler={addContactHandler} />
-      <ContactList contacts={contacts} getContactId={removeContactHandler}/>
-    </div>
+    <BrowserRouter>
+      <div className="ui container-fluid">
+        <Header />
+        <Routes>
+          <Route
+            index
+            element={
+              <ContactList
+                contacts={contacts}
+                getContactId={removeContactHandler}
+              />
+            }
+          />
+          <Route
+            path="add"
+            element={<AddContact addContactHandler={addContactHandler} />}
+          />
+          <Route path="contact/:id" element={<ContactDetail/>} />
+        </Routes>
+      </div>
+    </BrowserRouter>
   );
 }
 
