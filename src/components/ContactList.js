@@ -23,7 +23,13 @@ export default function ContactList(props) {
           <button className="ui blue button right floated">Add Contact</button>
         </Link>
       </h2>
-      <div className="ui celled list">{renderContactList}</div>
+      <div>
+        <div className="ui icon input" style={{width: "100%"}}>
+          <input type="text" value={props.term} placeholder="Search Contacts" className="prompt" onChange={(e) => props.searchKeyword(e.target.value)}/>
+          <i className="search icon" />
+        </div>
+      </div>
+      <div className="ui celled list">{renderContactList.length > 0 ? renderContactList : "No Contacts available"}</div>
     </div>
   );
 }

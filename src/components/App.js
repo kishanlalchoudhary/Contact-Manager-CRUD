@@ -1,15 +1,17 @@
 import { BrowserRouter, Route, Routes } from "react-router-dom";
 import { useEffect, useState } from "react";
 import uuid from "react-uuid";
+import api from "../api/contacts";
 import Header from "./Header";
 import AddContact from "./AddContact";
 import ContactList from "./ContactList";
 import ContactDetail from "./ContactDetail";
-import api from "../api/contacts";
 import EditContact from "./EditContact";
 
 function App() {
   const [contacts, setContacts] = useState([]);
+  const [searchTerm, setSearchTerm] = useState("");
+  const [searchResults, setSearchResults] = useState([]);
 
   const retrieveContacts = async () => {
     const response = await api.get("/contacts");
@@ -17,7 +19,6 @@ function App() {
   };
 
   const addContactHandler = async (contact) => {
-    console.log(contact);
     const request = {
       ...contact,
       id: uuid(),
@@ -45,6 +46,21 @@ function App() {
     );
   };
 
+  const searchHandler = (searchTerm) => {
+    setSearchTerm(searchTerm);
+    if (searchTerm !== "") {
+      const newContactList = contacts.filter((contact) => {
+        return Object.values(contact)
+          .join(" ")
+          .toLowerCase()
+          .includes(searchTerm.toLowerCase());
+      });
+      setSearchResults(newContactList);
+    } else {
+      setSearchResults(contacts);
+    }
+  };
+
   useEffect(() => {
     const getAllContacts = async () => {
       const allContacts = await retrieveContacts();
@@ -63,22 +79,25 @@ function App() {
             index
             element={
               <ContactList
-                contacts={contacts}
+                contacts={searchTerm.length < 1 ? contacts : searchResults}
                 getContactId={removeContactHandler}
+                term={searchTerm}
+                searchKeyword={searchHandler}
               />
             }
           />
           <Route
-            path="add"
+            path="/add"
             element={<AddContact addContactHandler={addContactHandler} />}
           />
           <Route
-            path="edit"
+            path="/edit"
             element={
               <EditContact updateContactHandler={updateContactHandler} />
             }
           />
           <Route path="contact/:id" element={<ContactDetail />} />
+          <Route path="*" element={<div>404 Page Not Found</div>} />
         </Routes>
       </div>
     </BrowserRouter>
