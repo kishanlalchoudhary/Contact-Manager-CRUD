@@ -53,7 +53,7 @@ export default function AddContact(props) {
         </div>
         <button className="ui button blue right floated">Add</button>
       </form>
-      <button className="ui button blue" onClick={props.backHandler}>
+      <button className="ui button blue" onClick={backHandler}>
         Back
       </button>
     </div>
