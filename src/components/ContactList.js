@@ -1,18 +1,12 @@
 import React from "react";
-import ContactCard from "./ContactCard";
 import { Link } from "react-router-dom";
 
-export default function ContactList(props) {
-  const deleteContactHandler = (id) => {
-    props.getContactId(id);
-  };
+// Components
+import ContactCard from "./ContactCard";
 
+export default function ContactList(props) {
   const renderContactList = props.contacts.map((contact) => (
-    <ContactCard
-      contact={contact}
-      clickHandler={deleteContactHandler}
-      key={contact.id}
-    />
+    <ContactCard contact={contact} key={contact.id} />
   ));
 
   return (
@@ -24,12 +18,24 @@ export default function ContactList(props) {
         </Link>
       </h2>
       <div>
-        <div className="ui icon input" style={{width: "100%"}}>
-          <input type="text" value={props.term} placeholder="Search Contacts" className="prompt" onChange={(e) => props.searchKeyword(e.target.value)}/>
+        <div className="ui icon input" style={{ width: "100%" }}>
+          <input
+            type="text"
+            value={props.term}
+            placeholder="Search Contacts"
+            className="prompt"
+            onChange={(e) => props.searchKeyword(e.target.value)}
+          />
           <i className="search icon" />
         </div>
       </div>
-      <div className="ui celled list">{renderContactList.length > 0 ? renderContactList : "No Contacts available"}</div>
+      <div className="ui celled list">
+        {renderContactList.length > 0 ? (
+          renderContactList
+        ) : (
+          <h3 className="ui center aligned header">No Contacts available</h3>
+        )}
+      </div>
     </div>
   );
 }

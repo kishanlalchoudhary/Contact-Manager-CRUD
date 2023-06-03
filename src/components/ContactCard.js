@@ -15,7 +15,7 @@ export default function ContactCard(props) {
         </Link>
       </div>
       <div className="ui basic right floated button" style={{ padding: "7px" }}>
-        <Link to={`/edit`} state={props.contact}>
+        <Link to={`/edit/${id}`} state={props.contact}>
           <i
             className="edit alternate outline icon"
             style={{
@@ -26,18 +26,17 @@ export default function ContactCard(props) {
             }}
           ></i>
         </Link>
-        <i
-          className="trash alternate outline icon"
-          style={{
-            color: "red",
-            fontSize: "20px",
-            margin: "0px",
-            marginLeft: "10px",
-          }}
-          onClick={() => {
-            props.clickHandler(id);
-          }}
-        ></i>
+        <Link to={`/delete/${id}`} state={props.contact}>
+          <i
+            className="trash alternate outline icon"
+            style={{
+              color: "red",
+              fontSize: "20px",
+              margin: "0px",
+              marginLeft: "10px",
+            }}
+          ></i>
+        </Link>
       </div>
     </div>
   );

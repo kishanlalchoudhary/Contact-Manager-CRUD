@@ -2,13 +2,17 @@ import { BrowserRouter, Route, Routes } from "react-router-dom";
 import { useEffect, useState } from "react";
 import uuid from "react-uuid";
 import api from "../api/contacts";
+
+// Components
 import Header from "./Header";
 import AddContact from "./AddContact";
 import ContactList from "./ContactList";
 import ContactDetail from "./ContactDetail";
 import EditContact from "./EditContact";
+import DeleteContact from "./DeleteContact";
 
 function App() {
+  // states
   const [contacts, setContacts] = useState([]);
   const [searchTerm, setSearchTerm] = useState("");
   const [searchResults, setSearchResults] = useState([]);
@@ -91,13 +95,24 @@ function App() {
             element={<AddContact addContactHandler={addContactHandler} />}
           />
           <Route
-            path="/edit"
+            path="edit/:id"
             element={
               <EditContact updateContactHandler={updateContactHandler} />
             }
           />
+          <Route
+            path="delete/:id"
+            element={
+              <DeleteContact removeContactHandler={removeContactHandler} />
+            }
+          />
           <Route path="contact/:id" element={<ContactDetail />} />
-          <Route path="*" element={<div>404 Page Not Found</div>} />
+          <Route
+            path="*"
+            element={
+              <h3 className="ui center aligned header">404 Page Not Found</h3>
+            }
+          />
         </Routes>
       </div>
     </BrowserRouter>

@@ -12,10 +12,14 @@ export default function AddContact(props) {
       alert("All the fields are mandatory!");
       return;
     }
-    props.addContactHandler({ name: name, email: email });
+    props.addContactHandler({ name, email });
     setName("");
     setEmail("");
     navigate("/");
+  };
+
+  const backHandler = () => {
+    navigate(-1);
   };
 
   return (
@@ -42,8 +46,11 @@ export default function AddContact(props) {
             onChange={(e) => setEmail(e.target.value)}
           />
         </div>
-        <button className="ui button blue">Add</button>
+        <button className="ui button blue right floated">Add</button>
       </form>
+      <button className="ui button blue" onClick={props.backHandler}>
+        Back
+      </button>
     </div>
   );
 }
