@@ -1,8 +1,11 @@
 import React from "react";
-import user from "../images/user.jpg";
 import { Link, useLocation } from "react-router-dom";
 
+// Importing Images
+import user from "../images/user.jpg";
+
 export default function ContactDetail(props) {
+  // Hooks
   const location = useLocation();
 
   return (

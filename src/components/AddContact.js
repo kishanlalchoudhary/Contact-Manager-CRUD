@@ -2,10 +2,14 @@ import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 
 export default function AddContact(props) {
+  // States
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
+
+  // Hooks
   const navigate = useNavigate();
 
+  // handling add button
   const add = (e) => {
     e.preventDefault();
     if (name === "" || email === "") {
@@ -18,6 +22,7 @@ export default function AddContact(props) {
     navigate("/");
   };
 
+  // handling back button
   const backHandler = () => {
     navigate(-1);
   };

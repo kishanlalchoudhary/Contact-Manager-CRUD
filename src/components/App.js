@@ -1,6 +1,8 @@
 import { BrowserRouter, Route, Routes } from "react-router-dom";
 import { useEffect, useState } from "react";
 import uuid from "react-uuid";
+
+// Importing api file
 import api from "../api/contacts";
 
 // Components
@@ -17,11 +19,13 @@ function App() {
   const [searchTerm, setSearchTerm] = useState("");
   const [searchResults, setSearchResults] = useState([]);
 
+  // Get contacts
   const retrieveContacts = async () => {
     const response = await api.get("/contacts");
     return response.data;
   };
 
+  // Add contact
   const addContactHandler = async (contact) => {
     const request = {
       ...contact,
@@ -32,6 +36,7 @@ function App() {
     setContacts([...contacts, response.data]);
   };
 
+  // Delete contact
   const removeContactHandler = async (id) => {
     await api.delete(`/contacts/${id}`);
     const newContactList = contacts.filter((contact) => {
@@ -40,6 +45,7 @@ function App() {
     setContacts(newContactList);
   };
 
+  // Update Contact
   const updateContactHandler = async (contact) => {
     const response = await api.put(`/contacts/${contact.id}`, contact);
     const { id, name, email } = response.data;
@@ -50,6 +56,7 @@ function App() {
     );
   };
 
+  // Search Contacts
   const searchHandler = (searchTerm) => {
     setSearchTerm(searchTerm);
     if (searchTerm !== "") {
@@ -65,6 +72,7 @@ function App() {
     }
   };
 
+  // Get Contacts when website is reloaded
   useEffect(() => {
     const getAllContacts = async () => {
       const allContacts = await retrieveContacts();

@@ -2,14 +2,17 @@ import React from "react";
 import { Navigate, useLocation, useNavigate } from "react-router-dom";
 
 export default function DeleteContact(props) {
+  // Hooks
   const location = useLocation();
   const navigate = useNavigate();
-
+  
+  // handling yes button
   const remove = async () => {
     await props.removeContactHandler(location.state.id);
     navigate(-1);
   };
 
+  // handling back button
   const backHandler = () => {
     navigate(-1);
   };

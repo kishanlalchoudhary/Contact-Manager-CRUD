@@ -1,6 +1,8 @@
 import React from "react";
-import user from "../images/user.png";
 import { Link } from "react-router-dom";
+
+// Importing Images
+import user from "../images/user.png";
 
 export default function ContactCard(props) {
   const { id, name, email } = props.contact;

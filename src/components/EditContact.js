@@ -3,18 +3,22 @@ import { Navigate, useNavigate } from "react-router-dom";
 import { useLocation } from "react-router-dom";
 
 export default function EditContact(props) {
-  const location = useLocation();
+  // States
   const [name, setName] = useState(location.state?.name);
   const [email, setEmail] = useState(location.state?.email);
+
+  // Hooks
+  const location = useLocation();
   const navigate = useNavigate();
 
-  const update = (e) => {
+  // handling update button
+  const update = async (e) => {
     e.preventDefault();
     if (name === "" || email === "") {
       alert("All the fields are mandatory!");
       return;
     }
-    props.updateContactHandler({
+    await props.updateContactHandler({
       id: location.state.id,
       name: name,
       email: email,
@@ -24,6 +28,7 @@ export default function EditContact(props) {
     navigate("/");
   };
 
+  // handling back button
   const backHandler = () => {
     navigate(-1);
   };
@@ -61,7 +66,7 @@ export default function EditContact(props) {
           </button>
         </div>
       ) : (
-        <Navigate to="/"/>
+        <Navigate to="/" />
       )}
     </>
   );

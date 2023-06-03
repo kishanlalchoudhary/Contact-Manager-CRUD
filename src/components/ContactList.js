@@ -5,6 +5,7 @@ import { Link } from "react-router-dom";
 import ContactCard from "./ContactCard";
 
 export default function ContactList(props) {
+  // Display Contacts
   const renderContactList = props.contacts.map((contact) => (
     <ContactCard contact={contact} key={contact.id} />
   ));
