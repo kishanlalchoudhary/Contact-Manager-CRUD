@@ -3,13 +3,13 @@ import { Navigate, useNavigate } from "react-router-dom";
 import { useLocation } from "react-router-dom";
 
 export default function EditContact(props) {
-  // States
-  const [name, setName] = useState(location.state?.name);
-  const [email, setEmail] = useState(location.state?.email);
-
   // Hooks
   const location = useLocation();
   const navigate = useNavigate();
+
+  // States
+  const [name, setName] = useState(location.state?.name);
+  const [email, setEmail] = useState(location.state?.email);
 
   // handling update button
   const update = async (e) => {
