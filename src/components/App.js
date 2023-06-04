@@ -29,8 +29,8 @@ function App() {
   const addContactHandler = async (contact) => {
     try {
       const request = {
-        ...contact,
         id: uuid(),
+        ...contact,
       };
 
       const response = await api.post("/contacts", request);
