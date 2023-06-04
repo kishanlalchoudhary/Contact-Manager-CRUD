@@ -27,33 +27,48 @@ function App() {
 
   // Add contact
   const addContactHandler = async (contact) => {
-    const request = {
-      ...contact,
-      id: uuid(),
-    };
+    try {
+      const request = {
+        ...contact,
+        id: uuid(),
+      };
 
-    const response = await api.post("/contacts", request);
-    setContacts([...contacts, response.data]);
+      const response = await api.post("/contacts", request);
+      setContacts([...contacts, response.data]);
+      alert("Contact added successfully");
+    } catch (err) {
+      alert(err);
+    }
   };
 
   // Delete contact
   const removeContactHandler = async (id) => {
-    await api.delete(`/contacts/${id}`);
-    const newContactList = contacts.filter((contact) => {
-      return contact.id !== id;
-    });
-    setContacts(newContactList);
+    try {
+      await api.delete(`/contacts/${id}`);
+      const newContactList = contacts.filter((contact) => {
+        return contact.id !== id;
+      });
+      setContacts(newContactList);
+      alert("Contact deleted successfully");
+    } catch (err) {
+      alert(err);
+    }
   };
 
   // Update Contact
   const updateContactHandler = async (contact) => {
-    const response = await api.put(`/contacts/${contact.id}`, contact);
-    const { id, name, email } = response.data;
-    setContacts(
-      contacts.map((contact) => {
-        return contact.id === id ? { ...response.data } : contact;
-      })
-    );
+    try {
+      const response = await api.put(`/contacts/${contact.id}`, contact);
+      const { id, name, email } = response.data;
+      setContacts(
+        contacts.map((contact) => {
+          return contact.id === id ? { ...response.data } : contact;
+        })
+      );
+      alert("Contact Updated Successfully");
+    } catch (err) {
+      alert(err);
+    }
   };
 
   // Search Contacts
