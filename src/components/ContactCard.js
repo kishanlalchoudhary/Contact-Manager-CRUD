@@ -1,10 +1,11 @@
-import React from "react";
+// Imports
 import { Link } from "react-router-dom";
+import PropTypes from "prop-types";
 
 // Importing Images
 import user from "../images/user.png";
 
-export default function ContactCard(props) {
+const ContactCard = (props) => {
   const { id, name, email } = props.contact;
 
   return (
@@ -42,4 +43,11 @@ export default function ContactCard(props) {
       </div>
     </div>
   );
-}
+};
+
+// Props Validation
+ContactCard.propTypes = {
+  contact: PropTypes.object.isRequired,
+};
+
+export default ContactCard;

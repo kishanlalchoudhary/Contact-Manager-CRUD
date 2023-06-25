@@ -1,11 +1,16 @@
+// Imports
 import { useState } from "react";
 import { Navigate, useNavigate } from "react-router-dom";
 import { useLocation } from "react-router-dom";
+import { useContactsCrud } from "../context/ContactsCrudContext";
 
-export default function EditContact(props) {
+const EditContact = () => {
   // Hooks
   const location = useLocation();
   const navigate = useNavigate();
+
+  // Contexts
+  const { updateContactHandler } = useContactsCrud();
 
   // States
   const [name, setName] = useState(location.state?.name);
@@ -18,7 +23,7 @@ export default function EditContact(props) {
       alert("All the fields are mandatory!");
       return;
     }
-    await props.updateContactHandler({
+    await updateContactHandler({
       id: location.state.id,
       name: name,
       email: email,
@@ -70,4 +75,6 @@ export default function EditContact(props) {
       )}
     </>
   );
-}
+};
+
+export default EditContact;

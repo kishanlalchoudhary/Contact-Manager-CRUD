@@ -1,14 +1,19 @@
+// Imports
 import React from "react";
 import { Navigate, useLocation, useNavigate } from "react-router-dom";
+import { useContactsCrud } from "../context/ContactsCrudContext";
 
-export default function DeleteContact(props) {
+const DeleteContact = () => {
   // Hooks
   const location = useLocation();
   const navigate = useNavigate();
-  
+
+  // Contexts
+  const { removeContactHandler } = useContactsCrud();
+
   // handling yes button
   const remove = async () => {
-    await props.removeContactHandler(location.state.id);
+    await removeContactHandler(location.state.id);
     navigate(-1);
   };
 
@@ -50,4 +55,6 @@ export default function DeleteContact(props) {
       )}
     </>
   );
-}
+};
+
+export default DeleteContact;

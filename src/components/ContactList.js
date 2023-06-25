@@ -1,14 +1,29 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { Link } from "react-router-dom";
+import { useContactsCrud } from "../context/ContactsCrudContext";
 
 // Components
 import ContactCard from "./ContactCard";
 
-export default function ContactList(props) {
+const ContactList = () => {
+  // Contexts
+  const {
+    contacts,
+    retrieveContacts,
+    searchTerm,
+    searchResults,
+    searchHandler,
+  } = useContactsCrud();
+
+  // Get Contacts when component is rendered
+  useEffect(() => {
+    retrieveContacts();
+  }, []);
+
   // Display Contacts
-  const renderContactList = props.contacts.map((contact) => (
-    <ContactCard contact={contact} key={contact.id} />
-  ));
+  const renderContactList = (
+    searchTerm.length < 1 ? contacts : searchResults
+  ).map((contact) => <ContactCard contact={contact} key={contact.id} />);
 
   return (
     <div className="ui main container">
@@ -22,10 +37,10 @@ export default function ContactList(props) {
         <div className="ui icon input" style={{ width: "100%" }}>
           <input
             type="text"
-            value={props.term}
+            value={searchTerm}
             placeholder="Search Contacts"
             className="prompt"
-            onChange={(e) => props.searchKeyword(e.target.value)}
+            onChange={(e) => searchHandler(e.target.value)}
           />
           <i className="search icon" />
         </div>
@@ -39,4 +54,6 @@ export default function ContactList(props) {
       </div>
     </div>
   );
-}
+};
+
+export default ContactList;

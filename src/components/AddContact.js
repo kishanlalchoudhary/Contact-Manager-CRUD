@@ -1,22 +1,27 @@
+// Imports
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
+import { useContactsCrud } from "../context/ContactsCrudContext";
 
-export default function AddContact(props) {
+const AddContact = () => {
+  // Hooks
+  const navigate = useNavigate();
+
+  // Contexts
+  const { addContactHandler } = useContactsCrud();
+
   // States
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
 
-  // Hooks
-  const navigate = useNavigate();
-
   // handling add button
-  const add = (e) => {
+  const add = async (e) => {
     e.preventDefault();
     if (name === "" || email === "") {
       alert("All the fields are mandatory!");
       return;
     }
-    props.addContactHandler({ name, email });
+    await addContactHandler({ name, email });
     setName("");
     setEmail("");
     navigate("/");
@@ -58,4 +63,6 @@ export default function AddContact(props) {
       </button>
     </div>
   );
-}
+};
+
+export default AddContact;

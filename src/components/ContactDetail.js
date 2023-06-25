@@ -1,10 +1,10 @@
-import React from "react";
+// Imports
 import { Link, useLocation } from "react-router-dom";
 
 // Importing Images
 import user from "../images/user.jpg";
 
-export default function ContactDetail(props) {
+const ContactDetail = () => {
   // Hooks
   const location = useLocation();
 
@@ -26,4 +26,6 @@ export default function ContactDetail(props) {
       </div>
     </div>
   );
-}
+};
+
+export default ContactDetail;
