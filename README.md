@@ -17,7 +17,7 @@ To run the Contact Manager application locally, follow these steps:
 
 ### 1. Clone the repository:
 ```
-git clone https://github.com/your-username/contact-manager.git
+git clone https://github.com/kishanlalchoudhary/Contact-Manager.git
 ```
 ### 2. Navigate to the project directory:
 ```
@@ -32,3 +32,13 @@ npm install
 npm start
 ```
 The application will be available at `http://localhost:3000`.
+
+## Technologies Used
+- React
+- React Router
+- Context API
+- Axios
+- HTML5
+- CSS3
+
+## Demo - https://contact-manager-crud.netlify.app/
