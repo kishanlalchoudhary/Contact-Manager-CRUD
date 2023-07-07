@@ -40,5 +40,3 @@ The application will be available at `http://localhost:3000`.
 - Axios
 - HTML5
 - CSS3
-
-## Demo - https://contact-manager-crud.netlify.app/
